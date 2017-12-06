@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "681063088450",
+    "firebase_url": "https://shoppingnotebook-1ef66.firebaseio.com",
+    "project_id": "shoppingnotebook-1ef66",
+    "storage_bucket": "shoppingnotebook-1ef66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681063088450:android:7c0980ed939f4786",
+        "android_client_info": {
+          "package_name": "com.example.carinadossantospereira.shoppingnotebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681063088450-i23c5pv7oruu9ji4ikeva54krcc4g4ii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUOcwRAhEwFNkSSQe5kzRcQfPGRECjyWY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

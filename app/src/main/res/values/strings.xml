@@ -1,0 +1,43 @@
+<resources>
+    <!-- Title -->
+    <string name="app_name">ShoppingNotebook</string>
+    <string name="loginTitle">Bem-Vindo(a) ao Pendura Aí</string>
+    <string name="transactionsValues">Valores Totais do Período</string>
+    <string name="date">Data</string>
+    <string name="value">Valor</string>
+    <string name="cliente">Cliente</string>
+    <string name="newCliente">Novo cliente</string>
+    <string name="shop">Estabelecimento</string>
+    <string name="account">Conta</string>
+    <string name="configuration">CONFIGURAÇÕES</string>
+    <string name="profile">Perfil</string>
+    <string name="sale">Vendas</string>
+    <string name="purchase">Compra</string>
+    <string name="appTitle">Pendura Aí</string>
+    <string name="coin">R$</string>
+
+
+    <!-- Buttons -->
+    <string name="btnGetOut">Sair</string>
+    <string name="btnLogIn">Entrar</string>
+    <string name="btnCreateAccount">Criar Conta</string>
+    <string name="btnTrader">Comerciante</string>
+    <string name="btnPaymentHistory">Histórico de Pagamentos</string>
+    <string name="btnCoinSum">+ R$</string>
+    <string name="btnCoinDecrease">- R$</string>
+    <string name="btnGraphicalAnalysis">Análise Gráfica</string>
+    <string name="btnPhoto">Foto</string>
+    <string name="btnRegisterPassword">Cadastrar Senha</string>
+
+    <!-- Hints -->
+    <string name="hintEmail">Email</string>
+    <string name="hintPassword">Senha</string>
+    <string name="hintPurchaseValue">Valor da compra</string>
+    <string name="hintConfirmPassword">Confirmar senha</string>
+    <string name="hintEnterprise">Empresa / Razão Social</string>
+    <string name="hintCNPJCPF">CNPJ / CPF</string>
+    <string name="hintPhone">Telefone</string>
+    <string name="hintName">Nome</string>
+    <string name="hintCPF">CPF</string>
+
+</resources>
