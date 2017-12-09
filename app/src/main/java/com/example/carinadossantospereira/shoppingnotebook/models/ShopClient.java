@@ -14,6 +14,10 @@ public class ShopClient {
     Double creditLimit = 0.0;
     String urlImage = "";
 
+    public ShopClient(){
+
+    }
+
     public ShopClient(String key, String userKey, String shopKey, String name, String cpf, String phone, Double creditLimit, String urlImage) {
         this.key = key;
         this.userKey = userKey;

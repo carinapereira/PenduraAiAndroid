@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.carinadossantospereira.shoppingnotebook.models.User;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText etEmail;
     private EditText etSenha;
+    private TextView etEsqueciSenha;
     private Button btnEntrar;
     private Button btnCriarConta;
     private FirebaseAuth mAuth;
@@ -42,6 +44,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnCriarConta = findViewById(R.id.btnCriarConta);
         btnCriarConta.setOnClickListener(this);
+
+        etEsqueciSenha = findViewById(R.id.etEsquecisenha);
+        etEsqueciSenha.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -88,12 +93,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 "Usuário NÃO autenticado!",
                                 Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(
-                                getBaseContext(),
-                                "Usuário autenticado com sucesso!",
-                                Toast.LENGTH_LONG).show();
-
-                        //redirecionar para tela de abertura
+                        Intent intent = new Intent(LoginActivity.this, ListClientActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                     progress.setVisibility(View.INVISIBLE);
@@ -150,6 +152,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void forgotPassword(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        if(!etEmail.getText().toString().isEmpty()) {
+            progress.setVisibility(View.VISIBLE);
+
+            User u = new User("", etEmail.getText().toString());
+
+            auth.sendPasswordResetEmail( u.getEmail())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getBaseContext(), "Email para redefinição de senha enviado com sucesso", Toast.LENGTH_LONG).show();
+                        }
+
+                        progress.setVisibility(View.INVISIBLE);
+                    }
+                });
+        }else{
+            Toast.makeText(getBaseContext(),"Digite o seu email/login pfv!", Toast.LENGTH_LONG).show();
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -175,6 +202,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.btnCriarConta:
                 createAccount();
+                break;
+
+            case R.id.etEsquecisenha:
+                forgotPassword();
                 break;
         }
     }
