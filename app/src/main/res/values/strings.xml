@@ -16,6 +16,8 @@
     <string name="appTitle">Pendura Aí</string>
     <string name="coin">R$</string>
     <string name="forgotpassword">esqueci minha senha</string>
+    <string name="save">Salvar</string>
+
 
 
     <!-- Buttons -->
@@ -40,5 +42,8 @@
     <string name="hintPhone">Telefone</string>
     <string name="hintName">Nome</string>
     <string name="hintCPF">CPF</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

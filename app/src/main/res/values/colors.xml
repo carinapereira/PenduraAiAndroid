@@ -5,8 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackgroundLogin">#FF1D7A7B</color>
     <color name="colorBtnOrangeDark">#ec7b5d</color>
-    <color name="colorBtnOrangeLight">#FFED957B</color>
+    <color name="colorBtnOrangeLight">#ed957b</color>
     <color name="colorBtnPink">#FFEB6463</color>
-    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhite">#ffffff</color>
 
 </resources>

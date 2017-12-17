@@ -50,24 +50,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
+        mAuth.signOut();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-            FirebaseUser user = firebaseAuth.getCurrentUser();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
 
-            if(user != null){
-                Toast.makeText(
-                        getBaseContext(),
-                        "Você já está logado!",
-                        Toast.LENGTH_LONG).show();
+                if(user != null){
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
 
-            }else{
-                Toast.makeText(
-                        getBaseContext(),
-                        "Você não está logado ainda!",
-                        Toast.LENGTH_LONG).show();
-            }
+                }
             }
         };
     }
@@ -93,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 "Usuário NÃO autenticado!",
                                 Toast.LENGTH_LONG).show();
                     }else{
-                        Intent intent = new Intent(LoginActivity.this, ListClientActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -111,45 +107,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void createAccount(){
-        if(!etEmail.getText().toString().isEmpty() &&
-                !etSenha.getText().toString().isEmpty()){
-
-            progress.setVisibility(View.VISIBLE);
-
-            User u = new User(etEmail.getText().toString(), etSenha.getText().toString());
-
-            Log.d("TAG","u: "+u.toString());
-
-            mAuth.createUserWithEmailAndPassword(u.getEmail(), u.getUid())
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.d("TAG","task: "+task.isSuccessful());
-                    if(!task.isSuccessful()){
-                        Toast.makeText(
-                                getBaseContext(),
-                                "Erro ao criar conta!",
-                                Toast.LENGTH_LONG).show();
-                    }else{
-                        Toast.makeText(
-                                getBaseContext(),
-                                "Conta criada com sucesso!",
-                                Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(LoginActivity.this,ListClientActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-
-                    progress.setVisibility(View.INVISIBLE);
-                    }
-                });
-        }else{
-            Toast.makeText(
-                    getBaseContext(),
-                    "Digite os dados para criar a conta",
-                    Toast.LENGTH_LONG).show();
-        }
+         Intent intent = new Intent(LoginActivity.this, UserTypeActivity.class);
+         startActivity(intent);
     }
 
     private void forgotPassword(){

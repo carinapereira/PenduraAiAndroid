@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListClientActivity" />
-        <activity android:name=".NewClientActivity"></activity>
+        <activity android:name=".NewClientActivity" />
+        <activity android:name=".UserTypeActivity" />
+        <activity android:name=".CreateAccountActivity"></activity>
     </application>
 
 </manifest>
