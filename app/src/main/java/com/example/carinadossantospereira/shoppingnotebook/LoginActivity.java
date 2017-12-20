@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.carinadossantospereira.shoppingnotebook.config.ConfigurationFirebase;
 import com.example.carinadossantospereira.shoppingnotebook.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etEsqueciSenha = findViewById(R.id.etEsquecisenha);
         etEsqueciSenha.setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = ConfigurationFirebase.getFirebaseAutentication();
 
         mAuth.signOut();
 
@@ -76,13 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             User u = new User(etEmail.getText().toString(), etSenha.getText().toString());
 
-            Log.d("TAG","u: "+u.toString());
-
             mAuth.signInWithEmailAndPassword(u.getUid(),u.getEmail())
                 .addOnCompleteListener( LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                    Log.d("TAG","task: "+task.isSuccessful());
                     if(!task.isSuccessful()){
                         Toast.makeText(
                                 getBaseContext(),
@@ -112,23 +109,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void forgotPassword(){
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
         if(!etEmail.getText().toString().isEmpty()) {
             progress.setVisibility(View.VISIBLE);
 
             User u = new User("", etEmail.getText().toString());
 
-            auth.sendPasswordResetEmail( u.getEmail())
+            mAuth.sendPasswordResetEmail( u.getEmail())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getBaseContext(), "Email para redefinição de senha enviado com sucesso", Toast.LENGTH_LONG).show();
-                        }
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getBaseContext(), "Email para redefinição de senha enviado com sucesso", Toast.LENGTH_LONG).show();
+                    }
 
-                        progress.setVisibility(View.INVISIBLE);
+                    progress.setVisibility(View.INVISIBLE);
                     }
                 });
         }else{

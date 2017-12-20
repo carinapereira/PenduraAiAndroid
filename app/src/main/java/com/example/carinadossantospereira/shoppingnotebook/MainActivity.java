@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             tabLayout.getTabAt(1).setIcon(R.drawable.ic_sales);
             tabLayout.getTabAt(2).setIcon(R.drawable.ic_money);
             tabLayout.getTabAt(3).setIcon(R.drawable.ic_settings);
+
         }
     }
 }

@@ -4,52 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.carinadossantospereira.shoppingnotebook.CreateAccountActivity">
+    tools:context="com.example.carinadossantospereira.shoppingnotebook.ShopActivity">
 
     <EditText
-        android:id="@+id/eTAccountEmail"
+        android:id="@+id/etShopCompany"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="@string/hintEmail"
-        android:inputType="textEmailAddress"
+        android:hint="@string/hintEnterprise"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/eTAccountPassword"
+        android:id="@+id/etShopCnpj"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/hintPassword"
-        android:inputType="textPassword"
+        android:hint="@string/hintCNPJCPF"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTAccountEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/etShopCompany" />
 
     <EditText
-        android:id="@+id/eTAccountConfPassword"
+        android:id="@+id/etShopPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/hintConfirmPassword"
-        android:inputType="textPassword"
+        android:hint="@string/hintPhone"
+        android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTAccountPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/etShopCnpj" />
 
     <Button
-        android:id="@+id/btnAccountSave"
+        android:id="@+id/btnShopSave"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -60,17 +60,17 @@
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eTAccountConfPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/etShopPhone" />
 
     <ProgressBar
-        android:id="@+id/progressBarAccount"
+        android:id="@+id/progressBarShop"
         style="?android:attr/progressBarStyle"
-        android:layout_width="46dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAccountSave" />
+        app:layout_constraintTop_toBottomOf="@+id/btnShopSave" />
 </android.support.constraint.ConstraintLayout>

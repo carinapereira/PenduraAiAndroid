@@ -8,5 +8,7 @@
     <color name="colorBtnOrangeLight">#ed957b</color>
     <color name="colorBtnPink">#FFEB6463</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorgrey">#CCCCCC</color>
+
 
 </resources>

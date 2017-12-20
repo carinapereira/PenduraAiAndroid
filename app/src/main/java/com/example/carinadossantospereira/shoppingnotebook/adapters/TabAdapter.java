@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.carinadossantospereira.shoppingnotebook.fragments.CalendarFragment;
 import com.example.carinadossantospereira.shoppingnotebook.fragments.ConfigurationFragment;
 import com.example.carinadossantospereira.shoppingnotebook.fragments.ListClientFragment;
+import com.example.carinadossantospereira.shoppingnotebook.fragments.ListClientSalesFragment;
 
 /**
  * Created by carinadossantospereira on 11/12/17.
@@ -28,7 +29,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
                 fragment = new ListClientFragment();
                 break;
             case 1 :
-                fragment = new ListClientFragment();
+                fragment = new ListClientSalesFragment();
                 break;
             case 2 :
                 fragment = new CalendarFragment();

@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "681063088450",
-    "firebase_url": "https://shoppingnotebook-1ef66.firebaseio.com",
-    "project_id": "shoppingnotebook-1ef66",
-    "storage_bucket": "shoppingnotebook-1ef66.appspot.com"
+    "project_number": "142525485931",
+    "firebase_url": "https://shopnotebookdroid.firebaseio.com",
+    "project_id": "shopnotebookdroid",
+    "storage_bucket": "shopnotebookdroid.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:681063088450:android:7c0980ed939f4786",
+        "mobilesdk_app_id": "1:142525485931:android:7c0980ed939f4786",
         "android_client_info": {
           "package_name": "com.example.carinadossantospereira.shoppingnotebook"
         }
       },
       "oauth_client": [
         {
-          "client_id": "681063088450-i23c5pv7oruu9ji4ikeva54krcc4g4ii.apps.googleusercontent.com",
+          "client_id": "142525485931-ahfgh9ekb01u3f661955ggkk44dvbm78.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carinadossantospereira.shoppingnotebook",
+            "certificate_hash": "02d8fbfc38222b37c17dbf199ace0b4e6f393337"
+          }
+        },
+        {
+          "client_id": "142525485931-f5u4t1rqbgi0d453etnim4sqivicjecb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCUOcwRAhEwFNkSSQe5kzRcQfPGRECjyWY"
+          "current_key": "AIzaSyCasTSmrxNp1rY_hDIeOSfE6Or8uQ8m0z8"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142525485931-f5u4t1rqbgi0d453etnim4sqivicjecb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
