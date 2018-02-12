@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mAuth = ConfigurationFirebase.getFirebaseAutentication();
 
-        mAuth.signOut();
+       // mAuth.signOut();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override

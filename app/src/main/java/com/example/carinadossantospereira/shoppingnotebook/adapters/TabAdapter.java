@@ -15,7 +15,7 @@ import com.example.carinadossantospereira.shoppingnotebook.fragments.ListClientS
 
 public class TabAdapter extends FragmentStatePagerAdapter {
 
-    private String[] titleTabs = {"Clientes", "Vendas","Movimentações","Configurações"};
+    private String[] titleTabs = {"Clientes", "Vendas"};
     public TabAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -30,12 +30,6 @@ public class TabAdapter extends FragmentStatePagerAdapter {
                 break;
             case 1 :
                 fragment = new ListClientSalesFragment();
-                break;
-            case 2 :
-                fragment = new CalendarFragment();
-                break;
-            case 3 :
-                fragment = new ConfigurationFragment();
                 break;
         }
 

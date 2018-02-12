@@ -1,5 +1,8 @@
 package com.example.carinadossantospereira.shoppingnotebook.models;
 
+import com.example.carinadossantospereira.shoppingnotebook.config.ConfigurationFirebase;
+import com.google.firebase.database.DatabaseReference;
+
 /**
  * Created by carinadossantospereira on 30/11/17.
  */
@@ -18,15 +21,18 @@ public class ShopClient {
 
     }
 
-    public ShopClient(String key, String userKey, String shopKey, String name, String cpf, String phone, Double creditLimit, String urlImage) {
-        this.key = key;
-        this.userKey = userKey;
+    public ShopClient(String shopKey, String name, String cpf, String phone, Double creditLimit) {
         this.shopKey = shopKey;
         this.name = name;
         this.cpf = cpf;
         this.phone = phone;
         this.creditLimit = creditLimit;
-        this.urlImage = urlImage;
+    }
+
+    public void salvar(){
+        DatabaseReference referenceFirebase = ConfigurationFirebase.getFirebase();
+        String nextId = referenceFirebase.push().getKey();
+        referenceFirebase.child("shopClient").child(nextId).setValue(this);
     }
 
     public String getKey() {

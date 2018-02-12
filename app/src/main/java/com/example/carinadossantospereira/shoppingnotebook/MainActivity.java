@@ -4,6 +4,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 
 import com.example.carinadossantospereira.shoppingnotebook.adapters.TabAdapter;
 
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        createActionBar();
 
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -24,9 +27,15 @@ public class MainActivity extends AppCompatActivity {
         if(tabLayout.getTabCount() > 0){
             tabLayout.getTabAt(0).setIcon(R.drawable.ic_group);
             tabLayout.getTabAt(1).setIcon(R.drawable.ic_sales);
-            tabLayout.getTabAt(2).setIcon(R.drawable.ic_money);
-            tabLayout.getTabAt(3).setIcon(R.drawable.ic_settings);
-
         }
+    }
+
+    private void createActionBar(){
+        Toolbar toolbar = findViewById(R.id.toolbar_aux);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Pendura Aí");
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
     }
 }
