@@ -42,8 +42,13 @@
     <string name="hintName">Nome</string>
     <string name="hintCPF">CPF</string>
     <string name="hintCash">Limite Crédito</string>
+    <string name="hintCashlimit">Crédito</string>
+    <string name="hintCashTwo">Limite Crédito: R$:</string>
+    <string name="hintCashTree">Total de Compras: R$:</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_sair">Sair</string>
 
 </resources>

@@ -1,23 +1,29 @@
 package com.example.carinadossantospereira.shoppingnotebook.models;
 
+import com.example.carinadossantospereira.shoppingnotebook.config.ConfigurationFirebase;
+import com.google.firebase.database.DatabaseReference;
+
+import java.io.Serializable;
+
 /**
  * Created by carinadossantospereira on 30/11/17.
  */
 
-public class Purchase {
+public class Purchase implements Serializable {
     String key = "";
     Double value = 0.0;
-    String date = "";
-    String time = "";
     Boolean sum = false;
 
-    public Purchase(String key, Double value, String date, String time, Boolean sum) {
+    public Purchase() {
+
+    }
+
+    public Purchase(String key, Double value, Boolean sum) {
         this.key = key;
         this.value = value;
-        this.date = date;
-        this.time = time;
         this.sum = sum;
     }
+
 
     public String getKey() {
         return key;
@@ -33,22 +39,6 @@ public class Purchase {
 
     public void setValue(Double value) {
         this.value = value;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public Boolean getSum() {

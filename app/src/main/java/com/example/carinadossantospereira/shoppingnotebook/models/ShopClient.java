@@ -2,12 +2,16 @@ package com.example.carinadossantospereira.shoppingnotebook.models;
 
 import com.example.carinadossantospereira.shoppingnotebook.config.ConfigurationFirebase;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.Serializable;
 
 /**
  * Created by carinadossantospereira on 30/11/17.
  */
 
-public class ShopClient {
+public class ShopClient implements Serializable {
     String key = "";
     String userKey = "";
     String shopKey = "";
@@ -21,12 +25,13 @@ public class ShopClient {
 
     }
 
-    public ShopClient(String shopKey, String name, String cpf, String phone, Double creditLimit) {
+    public ShopClient(String shopKey, String name, String cpf, String phone, Double creditLimit, String urlImage) {
         this.shopKey = shopKey;
         this.name = name;
         this.cpf = cpf;
         this.phone = phone;
         this.creditLimit = creditLimit;
+        this.urlImage = urlImage;
     }
 
     public void salvar(){

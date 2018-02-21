@@ -1,9 +1,14 @@
 package com.example.carinadossantospereira.shoppingnotebook;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -17,15 +22,27 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.carinadossantospereira.shoppingnotebook.config.ConfigurationFirebase;
+import com.example.carinadossantospereira.shoppingnotebook.helper.BitmapUtils;
 import com.example.carinadossantospereira.shoppingnotebook.models.Shop;
 import com.example.carinadossantospereira.shoppingnotebook.models.ShopClient;
 import com.example.carinadossantospereira.shoppingnotebook.models.User;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.ByteArrayOutputStream;
+import java.util.List;
 
 import static android.view.View.*;
 
@@ -45,6 +62,8 @@ public class AddClientActivity extends AppCompatActivity {
     private User user;
     private Shop shop;
     private ValueEventListener valueEventListenerMensagem;
+    private ShopClient shopClient;
+    private String idShopClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +75,47 @@ public class AddClientActivity extends AppCompatActivity {
         createBtnPickPhoto();
         setReferencingComponents();
         getCurrentUser();
+
+        Intent intent = getIntent();
+        shopClient  = (ShopClient) intent.getSerializableExtra("shopClient");
+        if(shopClient != null) {
+            idShopClient = shopClient.getKey();
+            loadDataClient(shopClient);
+        }else{
+            idShopClient = "";
+        }
+
+    }
+
+    private void loadDataClient(ShopClient shopClient){
+        etName.setText(shopClient.getName());
+        etCpfCnpj.setText(shopClient.getCpf());
+        etPhone.setText(shopClient.getPhone());
+        etCreditLimit.setText(shopClient.getCreditLimit().toString());
+
+
+        Drawable imgCli = ContextCompat.getDrawable(this, R.drawable.ic_avatar);
+
+        String urlGetImage = shopClient.getUrlImage();
+
+        if (!StringUtils.isBlank(urlGetImage)) {
+            Picasso.Builder builder = new Picasso.Builder(this);
+            builder.listener(new Picasso.Listener()
+            {
+                @Override
+                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+                {
+                    exception.printStackTrace();
+                }
+            });
+            builder.build().load(urlGetImage).into(ivClient);
+
+            Picasso.with(this).load(urlGetImage)
+                    .error(R.drawable.ic_avatar)
+                    .into(ivClient);
+        } else {
+            ivClient.setImageDrawable(imgCli);
+        }
 
     }
 
@@ -156,11 +216,11 @@ public class AddClientActivity extends AppCompatActivity {
         etPhone.setError(null);
         etCreditLimit.setError(null);
 
-        String name = etName.getText().toString();
-        String cpfCnpj = etCpfCnpj.getText().toString();
-        String phone = etPhone.getText().toString();
+        final String name = etName.getText().toString();
+        final String cpfCnpj = etCpfCnpj.getText().toString();
+        final String phone = etPhone.getText().toString();
         String sCreditLimit = etCreditLimit.getText().toString();
-        Double creditLimit = Double.parseDouble(sCreditLimit);
+        final Double creditLimit = Double.parseDouble(sCreditLimit);
 
         boolean cancel = false;
         View focusView = null;
@@ -194,12 +254,71 @@ public class AddClientActivity extends AppCompatActivity {
             focusView.requestFocus();
         }else{
             progress.setVisibility(View.VISIBLE);
-            ShopClient shopClient = new ShopClient(shop.getKey(),name,cpfCnpj,phone,creditLimit);
-            shopClient.salvar();
-            Toast.makeText(AddClientActivity.this, "Cliente cadastrado com sucesso !", Toast.LENGTH_LONG);
-            finish();
+
+            if (ivClient != null && ivClient.getDrawable() != null) {
+               /* Drawable imgLogo = ivClient.getDrawable();
+                Drawable imgPlaceHolder = ContextCompat.getDrawable(this, R.drawable.ic_avatar);
+
+                Bitmap bitmapSol = ((BitmapDrawable) imgLogo).getBitmap();
+                Bitmap bitmapHolder = ((BitmapDrawable) imgPlaceHolder).getBitmap();
+
+                String imgStr = BitmapUtils.bitMapToString(bitmapSol);
+                String imgStrHolder = BitmapUtils.bitMapToString(bitmapHolder);*/
+
+                // Get the data from an ImageView as bytes
+                ivClient.setDrawingCacheEnabled(true);
+                ivClient.buildDrawingCache();
+                Bitmap bitmap = ivClient.getDrawingCache();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
+
+
+                FirebaseStorage referenceStorage = ConfigurationFirebase.getFirebaseStorage();
+                StorageReference storageRef = referenceStorage.getReferenceFromUrl("gs://shopnotebookdroid.appspot.com/");
+
+                // Create a reference to "mountains.jpg"
+                String nomeimagem = name + ".jpg";
+                StorageReference mountainsRef = storageRef.child(nomeimagem);
+
+                // Create a reference to 'images/mountains.jpg'
+                StorageReference mountainImagesRef = storageRef.child("images/" + nomeimagem);
+
+                // While the file names are the same, the references point to different files
+                mountainsRef.getName().equals(mountainImagesRef.getName());    // true
+                mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
+
+
+                UploadTask uploadTask = mountainsRef.putBytes(data);
+                uploadTask.addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                    }
+                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                        String downloadUrl = taskSnapshot.getDownloadUrl().toString();
+
+                        saveShopClient(name,cpfCnpj,phone,creditLimit,downloadUrl);
+                    }
+                });
+
+
+            }else{
+                saveShopClient(name,cpfCnpj,phone,creditLimit, "");
+            }
+
             progress.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public void saveShopClient(String name, String cpfCnpj, String phone, Double creditLimit, String urlImage){
+        ShopClient shopClient = new ShopClient(shop.getKey(),name,cpfCnpj,phone,creditLimit, urlImage);
+        shopClient.salvar();
+        Toast.makeText(AddClientActivity.this, "Cliente cadastrado com sucesso !", Toast.LENGTH_LONG);
+        finish();
     }
 
     @Override
@@ -213,5 +332,13 @@ public class AddClientActivity extends AppCompatActivity {
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_PICK_IMAGE && resultCode == RESULT_OK){
+            Uri selectedImage = data.getData();
+            Picasso.with(AddClientActivity.this).load(selectedImage).into(ivClient);
+        }
     }
 }
